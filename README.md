@@ -195,7 +195,5 @@ FROM T2;
 
 
 
-## Contact
 
-If you have any suggestions or questions, please feel free to connect with me!
-
+_I’d love to hear your thoughts! If you have any suggestions or questions, feel free to connect with me._
