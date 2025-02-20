@@ -8,7 +8,7 @@ This SQL practice problem is based on [Stratascratch - Retention Rate](https://p
 - Outline:
     - Practice (practice problem and query output)
     - Solution (step-by-step explanation)
-    - Query Optimization (refinement for efficiency and readability)
+    - Future Enhancements
 
 
 
