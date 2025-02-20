@@ -10,7 +10,7 @@ This SQL practice problem is based on [Stratascratch - Retention Rate](https://p
     - Solution (step-by-step explanation)
     - Query Optimization (refinement for efficiency and readability)
 
-[Retention Rate](https://platform.stratascratch.com/coding/2053-retention-rate?code_type=3)
+
 
 
 ## Practice
@@ -51,21 +51,91 @@ The final output should include the `account_i`d and the ratio of the retention 
 
 *This section outlines my thought process for solving the problem.*
 
-### Step 1: Identify the Fields Required
+### Step 1: Identify Required Data
+
+- Extract unique users (`user_id`) per `account_id` who were active in December 2020 and January 2021.
+- Determine if each user had activity in any future month.
+
+
+### Step 2a: Identify Active Users in December 2020
+
+- Create a temp table `T1` to store users active in December 2020 and January 2021.
+- Mark the latest activity date for each user per account ID.
+
+```sql
+WITH 
+    T AS (
+        SELECT 
+            account_id,
+            user_id, 
+            (SELECT COUNT(sub.record_date) 
+            FROM sf_events sub
+            WHERE sub.record_date BETWEEN '2020-12-01' AND '2020-12-31') AS Dec20_act,
+            (SELECT COUNT(sub.record_date) 
+            FROM sf_events sub
+            WHERE sub.record_date BETWEEN '2021-01-01' AND '2021-01-31') AS Jan21_act,
+            MAX(record_date) AS max_date
+        FROM sf_events
+        GROUP BY account_id, user_id
+        ORDER BY account_id, user_id
+    ), 
+```
+
+
+The temporary table `T1` should be similar to what we have below. 
+
+| account_id | user_id    | Dec20_act  | Jan21_act  | max_date   |
+|------------|------------|------------|------------|------------|
+| A1	     | U1	      | 10         | 9	        | 2021-02-07 |
+| A1	     | U2	      | 10         | 9	        | 2021-02-10 |
+| A1	     | U3	      | 10         | 9	        | 2021-01-06 |
+| A1	     | U8	      | 10         | 9	        | 2020-12-05 |
+| A2	     | U4	      | 10         | 9	        | 2021-02-01 |
+| A2	     | U5	      | 10         | 9	        | 2021-02-01 |
+| A3	     | U6	      | 10         | 9	        | 2021-01-14 |
+| A3	     | U7	      | 10         | 9	        | 2020-12-06 |
 
 
 
-### Step 2a: Create a Temporary Table `T1` to xxxx
+### Step 2b: Identify Active Users in January 2021
+
+- Create another temp table `T2` to check if users were retained in the future months of December 2020 and January 2021.
+
+```sql
+    T2 AS (
+        SELECT 
+            account_id,
+            (CASE WHEN Dec20_act > 0 AND max_date > '2020-12-31' THEN COUNT(user_id) END) AS Dec20_ret,
+            (CASE WHEN Jan21_act > 0 AND max_date > '2021-01-31' THEN COUNT(user_id) END) AS Jan21_ret
+        FROM T
+        GROUP BY account_id
+        ORDER BY account_id
+    )
+
+```
 
 
+The temporary table `T2` should be similar to what we have below. 
 
-### Step 2b: Create a Temporary Table `T2` to xxxx
+| account_id | Dec20_ret  | Jan21_ret  |
+|------------|------------|------------|
+| A1	     | 4	      | 4          |
+| A2	     | 2	      | 2          |
+| A3         | 2          |            |
 
 
+### Step 3: Calculate Retention Rate Ratio
 
-### Step 3: xxxxx
+- Compute the retention rate for both months per `account_id`.
+- Take the ratio of January's retention rate to December's.
+- If December has zero retained users, return `0` to avoid division by zero using `IFNULL()` function.
 
-
+```sql
+SELECT 
+    account_id, 
+    IFNULL(Jan21_ret/Dec20_ret, 0) AS retention
+FROM T2;
+```
 
 
 #### Final Syntax and Output using MySQL
@@ -127,5 +197,5 @@ FROM T2;
 
 ## Contact
 
-If you have any suggestions or questions, feel free to connect with me!
+If you have any suggestions or questions, please feel free to connect with me!
 
