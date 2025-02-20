@@ -1,6 +1,6 @@
 # [SQL] Retention Rate Ratio
 
-This SQL practice problem is based on [Stratascratch - Retention Rate](https://platform.stratascratch.com/coding/2053-retention-rate?code_type=3)
+This SQL practice problem is based on [Stratascratch - Retention Rate](https://platform.stratascratch.com/coding/2053-retention-rate?code_type=3). 
 
 
 - Objective: Calculate the ratio of the retention rate in January 2021 to the one in December 2020 for each account ID.
