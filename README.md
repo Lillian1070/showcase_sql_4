@@ -1,4 +1,4 @@
-# [SQL] Retention Rate Ratio
+# [SQL] Calculating Retention Rate Ratio
 
 _This SQL practice is based on a problem from [StrataScratch](https://platform.stratascratch.com/coding/2053-retention-rate?code_type=3), used here for personal learning and educational purposes._
 
