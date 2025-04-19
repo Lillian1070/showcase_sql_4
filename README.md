@@ -6,14 +6,14 @@ This SQL practice problem is based on [Stratascratch - Retention Rate](https://p
 - Objective: Calculate the ratio of the retention rate in January 2021 to the one in December 2020 for each account ID.
 - Practice Purpose: Self-learning and reinforcement of SQL data cleaning, aggregation, joins, subqueries, and window functions.
 - Outline:
-    - Practice (practice problem and query output)
-    - Solution (step-by-step explanation)
-    - Future Enhancements
+    - [Practice](#section-1) (practice problem and query output)
+    - [Solution](#section-2) (step-by-step explanation)
+    - [Future Enhancements](#section-3)
 
 
 
 
-## Practice
+## <a name="section-1"></a>🧪 Practice
 
 The dataset tracks user activity. It includes information about the date of user activity, the `account_id` associated with the activity, and the `user_id` of the user performing the activity. Each row in the dataset represents a user’s activity on a specific date for a particular `account_id`.
 
@@ -47,7 +47,7 @@ The final output should include the `account_i`d and the ratio of the retention 
 | A3         | 0          |
 
 
-## Solution
+## <a name="section-2"></a>🧠 Solution
 
 *This section outlines my thought process for solving the problem.*
 
@@ -185,7 +185,7 @@ FROM T2;
 
 
 
-## Future Enhancements
+## <a name="section-3"></a>🚀 Future Enhancements
 
 - Expanding solutions with additional SQL databases.
 
