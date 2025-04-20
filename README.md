@@ -68,12 +68,16 @@ WITH
         SELECT 
             account_id,
             user_id, 
-            (SELECT COUNT(sub.record_date) 
-            FROM sf_events sub
-            WHERE sub.record_date BETWEEN '2020-12-01' AND '2020-12-31') AS Dec20_act,
-            (SELECT COUNT(sub.record_date) 
-            FROM sf_events sub
-            WHERE sub.record_date BETWEEN '2021-01-01' AND '2021-01-31') AS Jan21_act,
+            (
+                SELECT COUNT(sub.record_date) 
+                FROM sf_events sub
+                WHERE sub.record_date BETWEEN '2020-12-01' AND '2020-12-31'
+            ) AS Dec20_act,
+            (
+                SELECT COUNT(sub.record_date) 
+                FROM sf_events sub
+                WHERE sub.record_date BETWEEN '2021-01-01' AND '2021-01-31'
+            ) AS Jan21_act,
             MAX(record_date) AS max_date
         FROM sf_events
         GROUP BY account_id, user_id
@@ -148,12 +152,16 @@ WITH
         SELECT 
             account_id,
             user_id, 
-            (SELECT COUNT(sub.record_date) 
-            FROM sf_events sub
-            WHERE sub.record_date BETWEEN '2020-12-01' AND '2020-12-31') AS Dec20_act,
-            (SELECT COUNT(sub.record_date) 
-            FROM sf_events sub
-            WHERE sub.record_date BETWEEN '2021-01-01' AND '2021-01-31') AS Jan21_act,
+            (
+                SELECT COUNT(sub.record_date) 
+                FROM sf_events sub
+                WHERE sub.record_date BETWEEN '2020-12-01' AND '2020-12-31'
+            ) AS Dec20_act,
+            (
+                SELECT COUNT(sub.record_date) 
+                FROM sf_events sub
+                WHERE sub.record_date BETWEEN '2021-01-01' AND '2021-01-31'
+            ) AS Jan21_act,
             MAX(record_date) AS max_date
         FROM sf_events
         GROUP BY account_id, user_id
