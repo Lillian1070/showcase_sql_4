@@ -26,7 +26,7 @@ Calculate the monthly retention rate for users for each `account_id` for Decembe
 For instance, a user is considered retained for December 2020 if they have activity in December 2020 and any subsequent month (e.g., January 2021 or later). Similarly, a user is retained for January 2021 if they have activity in January 2021 and any later month (e.g., February 2021 or later).
 
 
-The final output should include the `account_i`d and the ratio of the retention rate in January 2021 to the retention rate in December 2020 for each `account_id`. If there are no users retained in December 2020, the retention rate ratio should be set to 0.
+The final output should include the `account_id` and the ratio of the retention rate in January 2021 to the retention rate in December 2020 for each `account_id`. If there are no users retained in December 2020, the retention rate ratio should be set to 0.
 
 
 - Table: `sf_events`
